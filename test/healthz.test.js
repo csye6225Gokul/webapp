@@ -8,7 +8,7 @@ import Sequelize from 'sequelize';
 
 describe('GET /healthz', () => {
     it('should return status code 200', async () => {
-      const response = await request(app).get('/healthz');
+      const response = await request(app).get('/hea');
       expect(response.status).toBe(200);
     });
   })
