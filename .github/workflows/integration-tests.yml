@@ -14,8 +14,8 @@ jobs:
       mysql:
         image: mysql:5.7
         env:
-          MYSQL_ROOT_PASSWORD: 'msdIndu@99'  # Replace with actual password
-          MYSQL_DATABASE: 'webapp'         # Replace with actual database name
+          MYSQL_ROOT_PASSWORD: ${{ secrets.DB_PASSWORD }}  # Replace with actual password
+          MYSQL_DATABASE: ${{ secrets.DB_NAME }}        # Replace with actual database name
         ports:
           - 3306:3306
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
@@ -23,9 +23,9 @@ jobs:
     env:
         MYSQL_HOST: 127.0.0.1
         MYSQL_PORT: 3306
-        MYSQL_USER: root
-        MYSQL_PASSWORD: msdIndu@99  # Replace with actual password
-        MYSQL_DATABASE: webapp 
+        MYSQL_USER: ${{ secrets.DB_USER }} 
+        MYSQL_PASSWORD: ${{ secrets.DB_PASSWORD }}  # Replace with actual password
+        MYSQL_DATABASE: ${{ secrets.DB_NAME }} 
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
@@ -43,7 +43,7 @@ jobs:
       env:
         MYSQL_HOST: 127.0.0.1
         MYSQL_PORT: 3306
-        MYSQL_USER: root
-        MYSQL_PASSWORD: msdIndu@99        
+        MYSQL_USER: ${{ secrets.DB_USER }} 
+        MYSQL_PASSWORD: ${{ secrets.DB_PASSWORD }}       
     - name: Run Tests
       run: npm test
