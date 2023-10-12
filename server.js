@@ -7,7 +7,6 @@ import { config } from 'dotenv';
 config();
 
 
-
 // const user = process.env.MYSQL_USER;
 // const password = process.env.MYSQL_PASSWORD;
 // const host = process.env.MYSQL_HOST;
@@ -23,6 +22,7 @@ config();
 // });
 
 // sequelize.sync({ alter: true });
+
 
 const ports = 9000;
 app.listen(ports, () => {
