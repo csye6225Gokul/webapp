@@ -1,6 +1,6 @@
 import express from "express";
 import Sequelize from "sequelize";
-import { sequelize } from "../util/dbLoader.js";
+
 import { Assignment } from "../models/index.js";
 
 export const createAssignment = async (req, res) => {
@@ -16,6 +16,17 @@ export const createAssignment = async (req, res) => {
         
       }
     }
+
+
+    if(req.body.name == ""){
+      return res.status(400).json({ error: "Req body param is wrong" });
+    }
+
+
+    if(!Number.isInteger(req.body.points) || !Number.isInteger(req.body.num_of_attempts)){
+      return res.status(400).json({ error: "points and num attempt are integer type" });
+    }
+
 
     const assignment = await Assignment.create({
       ...req.body,
@@ -74,13 +85,29 @@ export const updateAssignment = async (req, res) => {
 
       const keys = ["name", "points", "num_of_attempts", "deadline"];
 
+      let count =0
       for (const key in req.body) {
         console.log(key);
+        count+=1
         if (!keys.includes(key)) {
           res.status(400).json({ error: "Req body param is wrong" });
           break; // You may want to break out of the loop after the first invalid key is encountered.
         }
       }
+
+      if(count<4){
+       return res.status(400).json({ error: "Req body all param should present" });
+      }
+
+      if(req.body.name == ""){
+        return res.status(400).json({ error: "Req body param is wrong" });
+      }
+
+      if(!Number.isInteger(req.body.points) || !Number.isInteger(req.body.num_of_attempts)){
+        return res.status(400).json({ error: "points and num attempt are integer type" });
+      }
+
+
 
       await assignment.update(req.body);
       delete assignment.dataValues.creatorId;
@@ -106,6 +133,13 @@ export const updateAssignment = async (req, res) => {
 
 export const deleteAssignment = async (req, res) => {
   try {
+
+    if (req.headers["content-length"] > 0) {
+      res.set("Cache-Control", "no-cache");
+      return res.status(400).end();
+    }
+
+
     const assignment = await Assignment.findByPk(req.params.id);
     if (assignment) {
       if (assignment.creatorId !== req.user.id) {

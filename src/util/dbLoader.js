@@ -15,18 +15,18 @@ const database = process.env.MYSQL_DATABASE;
 const mysqlUrl = `mysql://${user}:${password}@${host}:${port}`
 const mysqlUrlDB = `mysql://${user}:${password}@${host}:${port}/${database}`
 
-export const sequelize = new Sequelize(mysqlUrlDB, {
-    dialectOptions: {
-        ssl: false  
-    },
-    timezone: 'America/New_York' 
-});
+export const sequelize = new Sequelize(mysqlUrlDB, { logging: false });
 
 async function ensureDatabaseExists() {
+
+  console.log("inside ensure database")
+  console.log()
+
   const tmpSequelize = new Sequelize(mysqlUrl, { logging: false });
 
   try {
-    await tmpSequelize.query(`CREATE DATABASE IF NOT EXISTS ${database};`);
+    await tmpSequelize.query(`CREATE DATABASE IF NOT EXISTS \`${database}\``
+    );
     console.log('Database ensured.');
   } catch (err) {
     console.error('Error while ensuring database exists', err);
@@ -37,6 +37,7 @@ async function ensureDatabaseExists() {
 }
 
 export default async function loadData() {
+
   await ensureDatabaseExists();
 
   try {
@@ -77,4 +78,3 @@ export default async function loadData() {
   }
 
 }
-
