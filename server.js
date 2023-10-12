@@ -22,7 +22,7 @@ config();
 
 // });
 
-sequelize.sync({ alter: true });
+// sequelize.sync({ alter: true });
 
 const ports = 9000;
 app.listen(ports, () => {
