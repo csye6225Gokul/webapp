@@ -50,4 +50,4 @@ jobs:
         DEMO_ACCOUNT_ID: ${{secrets.DEMO_ACCOUNT_ID}}
         AWS_REGION: "us-east-1"  # Adjust as per your requirement
       run: |
-        packer build packer.pkr.hcl
+        packer build packer/packer.pkr.hcl
