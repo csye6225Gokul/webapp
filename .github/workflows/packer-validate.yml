@@ -46,11 +46,11 @@ jobs:
     
     - name: Build AMI with Packer
       env:
-        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY }}
-        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_KEY }}
-        DEMO_ACCOUNT_ID: ${{secrets.DEMO_ACCOUNT_ID}}
-        AWS_REGION: "us-east-1"  # Adjust as per your requirement
+        aws_access_key: ${{ secrets.AWS_ACCESS_KEY }}
+        aws_secret_key: ${{ secrets.AWS_SECRET_KEY }}
+        demo_account_id: ${{secrets.DEMO_ACCOUNT_ID}}
+        aws_region: "us-east-1"  # Adjust as per your requirement
       run: |
-        echo $AWS_ACCESS_KEY_ID
-        echo $AWS_SECRET_ACCESS_KEY
+        echo $aws_access_key
+        echo $aws_secret_key
         packer build packer/packer.pkr.hcl
