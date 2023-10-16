@@ -82,7 +82,9 @@ provisioner "shell" {
     inline = [
     "sudo apt-get update",
     "sudo apt-get install -y nodejs npm unzip mariadb-server",
-    "sudo mysql -e \"ALTER USER 'root'@'localhost' IDENTIFIED WITH 'mysql_native_password' BY 'msdIndu@99'; FLUSH PRIVILEGES;\"",
+    "sudo systemctl start mariadb",
+    "sudo apt-get install -y expect",
+    "echo -e '\\n\\N\\nY\\n${var.db_root_password}\\n${var.db_root_password}\\nN\\nN\\nN\\nY\\n' | sudo mysql_secure_installation",
     "cd /home/admin && unzip webapp.zip -d webapp && cd webapp && npm install"
   ]
   }
