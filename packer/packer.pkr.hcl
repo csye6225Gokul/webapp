@@ -64,7 +64,7 @@ source "amazon-ebs" "example" {
   }
   instance_type = "t2.micro"
   ami_name = "csye6225_Gokul${formatdate("YYYY_MM_DD_hh_mm_ss", timestamp())}"
-  ami_users     = [var.demo_account_id] # Sharing AMI with DEMO account
+  ami_users     = ["877555005716","544273504223"] # Sharing AMI with DEMO account
   ssh_username  = "admin"
   access_key = var.aws_access_key
   secret_key = var.aws_secret_key

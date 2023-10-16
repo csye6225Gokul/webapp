@@ -35,7 +35,7 @@ jobs:
     
     - name: Packer init
       run: |
-          export PACKER_GITHUB_API_TOKEN= ${{ secrets.PACKER_GITHUB_API_TOKEN }}
+        #   export PACKER_GITHUB_API_TOKEN= ${{ secrets.PACKER_GITHUB_API_TOKEN }}
           packer init packer/packer.pkr.hcl
     
     - name: Download Artifact
