@@ -41,6 +41,7 @@ jobs:
     
     - name: Validate Packer Template
       run: |
+        packer fmt packer/packer.pkr.hcl
         packer validate packer/packer.pkr.hcl
     
     - name: Build AMI with Packer
@@ -50,4 +51,6 @@ jobs:
         DEMO_ACCOUNT_ID: ${{secrets.DEMO_ACCOUNT_ID}}
         AWS_REGION: "us-east-1"  # Adjust as per your requirement
       run: |
+        echo $AWS_ACCESS_KEY_ID
+        echo $AWS_SECRET_ACCESS_KEY
         packer build packer/packer.pkr.hcl
