@@ -28,11 +28,11 @@ variable "aws_region" {
   description = "AWS region to launch the instance in"
 }
 
-variable "source_ami" {
-  type        = string
-  default     = "ami-08c40ec9ead489470"
-  description = "Source AMI ID for Debian 12"
-}
+// variable "source_ami" {
+//   type        = string
+//   default     = "ami-08c40ec9ead489470"
+//   description = "Source AMI ID for Debian 12"
+// }
 
 variable "demo_account_id" {
   type        = string
@@ -51,7 +51,6 @@ variable "db_root_password" {
 
 source "amazon-ebs" "example" {
   region        = var.aws_region
-  //source_ami    = var.source_ami
   source_ami_filter {
     filters = {
       name                = "debian-12-*"
@@ -93,7 +92,11 @@ provisioner "shell" {
     "sudo systemctl start mariadb",
     "sudo apt-get install -y expect",
     "echo -e '\\n\\N\\nY\\n${var.db_root_password}\\n${var.db_root_password}\\nN\\nN\\nN\\nY\\n' | sudo mysql_secure_installation",
-    "cd /home/admin && unzip webapp.zip -d webapp && cd webapp && npm install"
+    "pwd"
+    "ls -a"
+    "cd /home/admin"
+    "pwd"
+    "unzip webapp.zip -d webapp && cd webapp && npm install"
   ]
   }
 }
