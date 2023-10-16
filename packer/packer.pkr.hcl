@@ -47,8 +47,7 @@ source "amazon-ebs" "example" {
   instance_type = "t2.micro"
   ami_name = "csye6225_Gokul${formatdate("YYYY_MM_DD_hh_mm_ss", timestamp())}"
   ami_users     = [var.demo_account_id] # Sharing AMI with DEMO account
-  ssh_username  = "admin"
-
+  ssh_username  = "debian"
   access_key = var.aws_access_key
   secret_key = var.aws_secret_key
 }
@@ -66,7 +65,7 @@ provisioner "shell" {
 
   provisioner "file" {
     source      = "webapp.zip"
-    destination = "/home/admin/webapp.zip"
+    destination = "/home/debian/webapp.zip"
   }
 
   provisioner "shell" {
@@ -74,7 +73,7 @@ provisioner "shell" {
     "sudo apt-get update",
     "sudo apt-get install -y nodejs npm unzip mariadb-server",
     "sudo mysql -e \"ALTER USER 'root'@'localhost' IDENTIFIED WITH 'mysql_native_password' BY 'msdIndu@99'; FLUSH PRIVILEGES;\"",
-    "cd /home/admin && unzip webapp.zip -d webapp && cd webapp && npm install"
+    "cd /home/debian && unzip webapp.zip -d webapp && cd webapp && npm install"
   ]
   }
 }
