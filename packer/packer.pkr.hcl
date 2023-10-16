@@ -43,11 +43,21 @@ variable "demo_account_id" {
 
 source "amazon-ebs" "example" {
   region        = var.aws_region
-  source_ami    = var.source_ami
+  //source_ami    = var.source_ami
+  source_ami_filter {
+    filters = {
+      name                = "debian-12-*"
+      root-device-type    = "ebs"
+      virtualization-type = "hvm"
+      architecture        = "x86_64"
+    }
+    most_recent = true
+    owners      = ["aws-marketplace"]
+  }
   instance_type = "t2.micro"
   ami_name = "csye6225_Gokul${formatdate("YYYY_MM_DD_hh_mm_ss", timestamp())}"
   ami_users     = [var.demo_account_id] # Sharing AMI with DEMO account
-  ssh_username  = "debian"
+  ssh_username  = "admin"
   access_key = var.aws_access_key
   secret_key = var.aws_secret_key
 }
@@ -65,7 +75,7 @@ provisioner "shell" {
 
   provisioner "file" {
     source      = "webapp.zip"
-    destination = "/home/debian/webapp.zip"
+    destination = "/home/admin/webapp.zip"
   }
 
   provisioner "shell" {
@@ -73,7 +83,7 @@ provisioner "shell" {
     "sudo apt-get update",
     "sudo apt-get install -y nodejs npm unzip mariadb-server",
     "sudo mysql -e \"ALTER USER 'root'@'localhost' IDENTIFIED WITH 'mysql_native_password' BY 'msdIndu@99'; FLUSH PRIVILEGES;\"",
-    "cd /home/debian && unzip webapp.zip -d webapp && cd webapp && npm install"
+    "cd /home/admin && unzip webapp.zip -d webapp && cd webapp && npm install"
   ]
   }
 }
