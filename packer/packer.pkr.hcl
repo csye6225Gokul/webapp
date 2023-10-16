@@ -13,6 +13,7 @@ variable "aws_access_key" {
   default   = "none"
   sensitive   = true
   description = "AWS Access Key"
+  default     = env("PACKER_AWS_ACCESS_KEY")
 }
 
 variable "aws_secret_key" {
@@ -20,6 +21,7 @@ variable "aws_secret_key" {
   sensitive   = true
   default   = "none"
   description = "AWS Secret Key"
+  default     = env("PACKER_AWS_SECRET_KEY")
 }
 
 variable "aws_region" {
@@ -54,6 +56,14 @@ source "amazon-ebs" "example" {
 }
 
 build {
+
+provisioner "shell" {
+  inline = [
+    "echo $AWS_ACCESS_KEY_ID",
+    "echo $AWS_SECRET_ACCESS_KEY"
+  ]
+}
+
   sources = ["source.amazon-ebs.example"]
 
   provisioner "file" {

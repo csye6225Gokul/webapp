@@ -46,9 +46,11 @@ jobs:
     
     - name: Build AMI with Packer
       env:
-        aws_access_key: ${{ secrets.AWS_ACCESS_KEY }}
-        aws_secret_key: ${{ secrets.AWS_SECRET_KEY }}
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_KEY }}
         demo_account_id: ${{secrets.DEMO_ACCOUNT_ID}}
+        PACKER_AWS_ACCESS_KEY: ${{ secrets.AWS_ACCESS_KEY }}
+        PACKER_AWS_SECRET_KEY: ${{ secrets.AWS_SECRET_KEY }}
         aws_region: "us-east-1"  # Adjust as per your requirement
       run: |
         echo $aws_access_key
