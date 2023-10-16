@@ -1,0 +1,64 @@
+name: CI/CD Workflow
+
+on:
+    pull_request:
+      branches:
+        - main
+
+jobs:
+  packer-validate:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+
+    - name: Setup Packer
+      uses: hashicorp/setup-packer@main
+      id: setup
+      with:
+        version: "latest"
+
+    - name: Zip Repository
+      run: |
+        zip -r webapp.zip . -x "*.git*"
+
+    - name: Print Working Directory
+      run: pwd
+    
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: webapp
+        path: webapp.zip
+
+    
+    - name: Packer init
+      run: |
+        #   export PACKER_GITHUB_API_TOKEN= ${{ secrets.PACKER_GITHUB_API_TOKEN }}
+          packer init packer/packer.pkr.hcl
+    
+    - name: Download Artifact
+      uses: actions/download-artifact@v2
+      with:
+        name: webapp
+        path: artifacts
+    
+    - name: Validate Packer Template
+      run: |
+        packer fmt packer/packer.pkr.hcl
+        packer validate packer/packer.pkr.hcl
+    
+    - name: Build AMI with Packer
+      env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_KEY }}
+        demo_account_id: ${{secrets.DEMO_ACCOUNT_ID}}
+        PACKER_AWS_ACCESS_KEY: ${{ secrets.AWS_ACCESS_KEY }}
+        PACKER_AWS_SECRET_KEY: ${{ secrets.AWS_SECRET_KEY }}
+        db_root_password: ${{ secrets.DB_PASSWORD }}
+        aws_region: "us-east-1"  # Adjust as per your requirement
+      run: |
+        echo $aws_access_key
+        echo $aws_secret_key
+        packer build packer/packer.pkr.hcl

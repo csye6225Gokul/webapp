@@ -122,6 +122,21 @@ dist
 # Stores VSCode versions used for testing VSCode extensions
 .vscode-test
 
+
+# Dependencies
+node_modules/
+
+# IDE - Visual Studio Code
+.vscode/
+
+# System Files
+.DS_Store
+
+# Pulumi
+bin/
+pulumi-debug.yaml
+
+
 # yarn v2
 .yarn/cache
 .yarn/unplugged
