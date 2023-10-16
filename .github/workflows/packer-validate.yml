@@ -36,7 +36,7 @@ jobs:
     - name: Download Artifact
       uses: actions/download-artifact@v2
       with:
-        name: app
+        name: webapp
         path: artifacts
     
     - name: Validate Packer Template
