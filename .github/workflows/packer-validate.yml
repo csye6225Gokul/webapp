@@ -56,4 +56,4 @@ jobs:
       run: |
         echo $aws_access_key
         echo $aws_secret_key
-        packer build packer/packer.pkr.hcl
+        packer -var "db_root_password=${DB_PASSWORD}" build packer/packer.pkr.hcl
