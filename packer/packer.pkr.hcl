@@ -41,6 +41,14 @@ variable "demo_account_id" {
   description = "AWS Demo Account"
 }
 
+
+variable "db_root_password" {
+  type        = string
+  sensitive   = true
+  default   = "none"
+  description = "DB Password"
+}
+
 source "amazon-ebs" "example" {
   region        = var.aws_region
   //source_ami    = var.source_ami
