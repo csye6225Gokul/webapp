@@ -52,8 +52,9 @@ jobs:
         demo_account_id: ${{secrets.DEMO_ACCOUNT_ID}}
         PACKER_AWS_ACCESS_KEY: ${{ secrets.AWS_ACCESS_KEY }}
         PACKER_AWS_SECRET_KEY: ${{ secrets.AWS_SECRET_KEY }}
+        db_root_password: ${{ secrets.DB_PASSWORD }}
         aws_region: "us-east-1"  # Adjust as per your requirement
       run: |
         echo $aws_access_key
         echo $aws_secret_key
-        packer -var "db_root_password=${DB_PASSWORD}" build packer/packer.pkr.hcl
+        packer build packer/packer.pkr.hcl
