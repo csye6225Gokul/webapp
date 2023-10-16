@@ -1,9 +1,13 @@
-import { Sequelize } from 'sequelize';
+import {
+  Sequelize
+} from 'sequelize';
 import fs from 'fs';
 import csv from 'csv-parser';
 import Account from '../models/account.js';
 import Assignment from '../models/assignment.js';
-import { config } from 'dotenv';
+import {
+  config
+} from 'dotenv';
 
 config();
 
@@ -15,18 +19,21 @@ const database = process.env.MYSQL_DATABASE;
 const mysqlUrl = `mysql://${user}:${password}@${host}:${port}`
 const mysqlUrlDB = `mysql://${user}:${password}@${host}:${port}/${database}`
 
-export const sequelize = new Sequelize(mysqlUrlDB, { logging: false });
+export const sequelize = new Sequelize(mysqlUrlDB, {
+  logging: false
+});
 
 async function ensureDatabaseExists() {
 
   console.log("inside ensure database")
   console.log()
 
-  const tmpSequelize = new Sequelize(mysqlUrl, { logging: false });
+  const tmpSequelize = new Sequelize(mysqlUrl, {
+    logging: false
+  });
 
   try {
-    await tmpSequelize.query(`CREATE DATABASE IF NOT EXISTS \`${database}\``
-    );
+    await tmpSequelize.query(`CREATE DATABASE IF NOT EXISTS \`${database}\``);
     console.log('Database ensured.');
   } catch (err) {
     console.error('Error while ensuring database exists', err);
@@ -57,7 +64,11 @@ export default async function loadData() {
       .pipe(csv())
       .on('data', async (row) => {
         try {
-          const existingAccount = await AccountModel.findOne({ where: { email: row.email } });
+          const existingAccount = await AccountModel.findOne({
+            where: {
+              email: row.email
+            }
+          });
 
           if (!existingAccount) {
             row.password = row.password.trim();
