@@ -87,17 +87,30 @@ provisioner "shell" {
   }
 
   provisioner "shell" {
-    inline = [
+  inline = [
     "sudo apt-get update",
     "sudo apt-get install -y nodejs npm unzip mariadb-server",
     "sudo systemctl start mariadb",
     "sudo apt-get install -y expect",
+    
+    # Secure installation
     "echo -e '\\n\\N\\nY\\n${var.db_root_password}\\n${var.db_root_password}\\nN\\nN\\nN\\nY\\n' | sudo mysql_secure_installation",
+    
+    # Login to MariaDB and grant privileges
+    "sudo mysql -uroot -p${var.db_root_password} -e \"GRANT ALL PRIVILEGES ON *.* TO 'root'@'localhost' IDENTIFIED BY '${var.db_root_password}' WITH GRANT OPTION; FLUSH PRIVILEGES;\"",
+    
     "pwd",
     "ls -a",
     "cd /home/admin",
     "pwd",
-    "unzip webapp.zip -d webapp && cd webapp && npm install"
+    "unzip webapp.zip -d webapp && cd webapp && npm install",
+    "echo 'MYSQL_USER=root' > /home/admin/webapp/.env",
+    "echo 'MYSQL_PASSWORD=${var.db_root_password}' >> /home/admin/webapp/.env",
+    "echo 'MYSQL_HOST=127.0.0.1' >> /home/admin/webapp/.env",
+    "echo 'MYSQL_PORT=3306' >> /home/admin/webapp/.env",
+    "echo 'MYSQL_DATABASE=webapp' >> /home/admin/webapp/.env",
+    "chown admin:admin /home/admin/webapp/.env" # Ensure that the 'admin' user owns the .env file
   ]
-  }
+}
+
 }
