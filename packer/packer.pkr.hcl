@@ -85,6 +85,15 @@ provisioner "shell" {
     source      = "webapp.zip"
     destination = "/home/admin/webapp.zip"
   }
+  provisioner "shell" {
+  inline = [
+    "echo 'first_name,last_name,email,password' > /opt/users.csv",
+    "echo 'john,doe,john.doe@example.com,abc123' >> /opt/users.csv",
+    "echo 'jane,doe,jane.doe@example.com,xyz456' >> /opt/users.csv",
+    "echo 'vivek,hana,vivek.hana@gmail.com,vivek123' >> /opt/users.csv",
+    "echo 'sara,john,sara.john@gmail.com,sara123' >> /opt/users.csv"
+  ]
+}
 
   provisioner "shell" {
   inline = [
@@ -109,8 +118,11 @@ provisioner "shell" {
     "echo 'MYSQL_HOST=127.0.0.1' >> /home/admin/webapp/.env",
     "echo 'MYSQL_PORT=3306' >> /home/admin/webapp/.env",
     "echo 'MYSQL_DATABASE=webapp' >> /home/admin/webapp/.env",
-    "chown admin:admin /home/admin/webapp/.env" # Ensure that the 'admin' user owns the .env file
+    "chown admin:admin /home/admin/webapp/.env", # Ensure that the 'admin' user owns the .env file
+    "node server.js"
   ]
 }
+
+
 
 }
