@@ -85,15 +85,17 @@ provisioner "shell" {
     source      = "webapp.zip"
     destination = "/home/admin/webapp.zip"
   }
-  provisioner "shell" {
-  inline = [
-    "echo 'first_name,last_name,email,password' > /opt/users.csv",
-    "echo 'john,doe,john.doe@example.com,abc123' >> /opt/users.csv",
-    "echo 'jane,doe,jane.doe@example.com,xyz456' >> /opt/users.csv",
-    "echo 'vivek,hana,vivek.hana@gmail.com,vivek123' >> /opt/users.csv",
-    "echo 'sara,john,sara.john@gmail.com,sara123' >> /opt/users.csv"
-  ]
+
+provisioner "shell" {
+    inline = [
+        "sudo sh -c 'echo \"first_name,last_name,email,password\" > /opt/users.csv'",
+        "sudo sh -c 'echo \"john,doe,john.doe@example.com,abc123\" >> /opt/users.csv'",
+        "sudo sh -c 'echo \"jane,doe,jane.doe@example.com,xyz456\" >> /opt/users.csv'",
+        "sudo sh -c 'echo \"vivek,hana,vivek.hana@gmail.com,vivek123\" >> /opt/users.csv'",
+        "sudo sh -c 'echo \"sara,john,sara.john@gmail.com,sara123\" >> /opt/users.csv'"
+    ]
 }
+
 
   provisioner "shell" {
   inline = [
