@@ -46,7 +46,7 @@ variable "demo_account_id" {
 variable "db_root_password" {
   type        = string
   sensitive   = true
-  default   = "none"
+  default   = env("PACKER_DB_ROOT_PASSWORD")
   description = "DB Password"
 }
 
@@ -89,13 +89,14 @@ provisioner "shell" {
   provisioner "shell" {
   inline = [
     "sudo apt-get update",
+    "echo ${var.db_root_password}"
     "sudo apt-get install -y nodejs npm unzip mariadb-server",
     "sudo systemctl start mariadb",
     "sudo apt-get install -y expect",
     
     # Secure installation
     "echo -e '\\n\\N\\nY\\n${var.db_root_password}\\n${var.db_root_password}\\nN\\nN\\nN\\nY\\n' | sudo mysql_secure_installation",
-    
+    "echo -e '\\n\\N\\nY\\n${var.db_root_password}\\n${var.db_root_password}\\nN\\nN\\nN\\nY\\n' | sudo mysql_secure_installation"
     # Login to MariaDB and grant privileges
     "sudo mysql -uroot -p${var.db_root_password} -e \"GRANT ALL PRIVILEGES ON *.* TO 'root'@'localhost' IDENTIFIED BY '${var.db_root_password}' WITH GRANT OPTION; FLUSH PRIVILEGES;\"",
     
