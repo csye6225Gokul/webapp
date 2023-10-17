@@ -9,19 +9,19 @@ packer {
 }
 
 
-variable "aws_access_key" {
-  type        = string
-  sensitive   = true
-  description = "AWS Access Key"
-  default     = env("PACKER_AWS_ACCESS_KEY")
-}
+// variable "aws_access_key" {
+//   type        = string
+//   sensitive   = true
+//   description = "AWS Access Key"
+//   default     = env("PACKER_AWS_ACCESS_KEY")
+// }
 
-variable "aws_secret_key" {
-  type        = string
-  sensitive   = true
-  description = "AWS Secret Key"
-  default     = env("PACKER_AWS_SECRET_KEY")
-}
+// variable "aws_secret_key" {
+//   type        = string
+//   sensitive   = true
+//   description = "AWS Secret Key"
+//   default     = env("PACKER_AWS_SECRET_KEY")
+// }
 
 variable "aws_region" {
   type        = string
@@ -66,8 +66,8 @@ source "amazon-ebs" "example" {
   ami_name = "csye6225_Gokul${formatdate("YYYY_MM_DD_hh_mm_ss", timestamp())}"
   ami_users     = ["877555005716","544273504223"] # Sharing AMI with DEMO account
   ssh_username  = "admin"
-  access_key = var.aws_access_key
-  secret_key = var.aws_secret_key
+//   access_key = var.aws_access_key
+//   secret_key = var.aws_secret_key
 }
 
 build {
