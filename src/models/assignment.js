@@ -73,11 +73,11 @@ const Assignment = (sequelize) => {
     assignment_updated: {
       type: DataTypes.DATE,
       defaultValue: DataTypes.NOW
+    },
+    creatorId: {
+      type: DataTypes.UUID,
+      allowNull: false
     }
-    // creatorId: {
-    //   type: DataTypes.UUID,
-    //   allowNull: false
-    // }
   }, {
     hooks: {
       beforeUpdate: (assignment) => {
