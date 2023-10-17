@@ -85,6 +85,7 @@ provisioner "shell" {
     source      = "webapp.zip"
     destination = "/home/admin/webapp.zip"
   }
+
 provisioner "shell" {
     inline = [
         "sudo sh -c 'echo \"first_name,last_name,email,password\" > /opt/users.csv'",
