@@ -131,6 +131,12 @@ provisioner "shell" {
   ]
 }
 
+  provisioner "shell" {
+    inline = [
+      "sudo apt-get purge -y git"
+    ]
+  }
+
 
 
 }
