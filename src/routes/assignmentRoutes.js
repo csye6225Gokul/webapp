@@ -23,7 +23,7 @@ Router.route('/:id').get(assignmentController.get)
 
 Router.route("*").all((req, res) => { 
   res.set('Cache-Control', 'no-cache');
-  res.status(405).end();
+  res.status(404).end();
   
 });
 
