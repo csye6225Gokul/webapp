@@ -139,6 +139,11 @@ export const deleteAssignment = async (req, res) => {
       return res.status(400).end();
     }
 
+    if (Object.keys(req.query).length > 0) {
+      res.set("Cache-Control", "no-cache");
+      return res.status(400).end();
+    }
+
 
     const assignment = await Assignment.findByPk(req.params.id);
     if (assignment) {
