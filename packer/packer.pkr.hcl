@@ -38,7 +38,14 @@ variable "aws_region" {
 variable "demo_account_id" {
   type        = string
   sensitive   = true
-  default   = "none"
+  default   = env("demo_account_id")
+  description = "AWS Demo Account"
+}
+
+variable "dev_account_id" {
+  type        = string
+  sensitive   = true
+  default   = env("dev_account_id")
   description = "AWS Demo Account"
 }
 
@@ -64,7 +71,7 @@ source "amazon-ebs" "example" {
   }
   instance_type = "t2.micro"
   ami_name = "csye6225_Gokul${formatdate("YYYY_MM_DD_hh_mm_ss", timestamp())}"
-  ami_users     = ["877555005716","544273504223"] # Sharing AMI with DEMO account
+  ami_users     = [var.dev_account_id,var.demo_account_id] # Sharing AMI with DEMO account
   ssh_username  = "admin"
 //   access_key = var.aws_access_key
 //   secret_key = var.aws_secret_key
