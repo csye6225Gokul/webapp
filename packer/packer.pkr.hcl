@@ -89,7 +89,7 @@ provisioner "shell" {
   sources = ["source.amazon-ebs.example"]
 
   provisioner "file" {
-    source      = "webapp2.zip"
+    source      = "webapp.zip"
     destination = "/home/admin/webapp.zip"
   }
 
