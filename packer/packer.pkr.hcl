@@ -128,7 +128,7 @@ provisioner "shell" {
     "echo 'MYSQL_PORT=3306' >> /home/admin/webapp/.env",
     "echo 'MYSQL_DATABASE=webapp' >> /home/admin/webapp/.env",
     "chown admin:admin /home/admin/webapp/.env" # Ensure that the 'admin' user owns the .env file
-  ]
+  
 }
 
   provisioner "shell" {
