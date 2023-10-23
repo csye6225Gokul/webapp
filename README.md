@@ -15,6 +15,7 @@ npm install
 
 3. **Run the App**  
 Once the dependencies are installed, you can run the app using:
+make sure you have users.csv file in /opt path of your device
 npm start
 
 ## Running Tests

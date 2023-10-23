@@ -121,13 +121,13 @@ provisioner "shell" {
     "ls -a",
     "cd /home/admin",
     "pwd",
-    "unzip webapp.zip -d webapp && cd webapp && npm install",
-    "echo 'MYSQL_USER=root' > /home/admin/webapp/.env",
-    "echo 'MYSQL_PASSWORD=${var.db_root_password}' >> /home/admin/webapp/.env",
-    "echo 'MYSQL_HOST=127.0.0.1' >> /home/admin/webapp/.env",
-    "echo 'MYSQL_PORT=3306' >> /home/admin/webapp/.env",
-    "echo 'MYSQL_DATABASE=webapp' >> /home/admin/webapp/.env",
-    "chown admin:admin /home/admin/webapp/.env" # Ensure that the 'admin' user owns the .env file
+    "unzip webapp.zip -d webapp && cd webapp && npm install"
+    // "echo 'MYSQL_USER=root' > /home/admin/webapp/.env",
+    // "echo 'MYSQL_PASSWORD=${var.db_root_password}' >> /home/admin/webapp/.env",
+    // "echo 'MYSQL_HOST=127.0.0.1' >> /home/admin/webapp/.env",
+    // "echo 'MYSQL_PORT=3306' >> /home/admin/webapp/.env",
+    // "echo 'MYSQL_DATABASE=webapp' >> /home/admin/webapp/.env",
+    // "chown admin:admin /home/admin/webapp/.env" # Ensure that the 'admin' user owns the .env file
   ]
 }
 
