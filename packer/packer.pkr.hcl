@@ -94,7 +94,7 @@ provisioner "shell" {
   }
 
   provisioner "file" {
-    source      = "/home/runner/work/webapp/webapp/csye6225.service",
+    source      = "/home/runner/work/webapp/webapp/csye6225.service"
     destination = "/etc/systemd/system/csye6225.service"
   }
 
