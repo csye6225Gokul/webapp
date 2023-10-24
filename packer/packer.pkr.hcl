@@ -106,8 +106,6 @@ provisioner "shell" {
       "sudo mv /home/admin/csye6225.service /etc/systemd/system/csye6225.service",
       "sudo chmod 644 /etc/systemd/system/csye6225.service",
       "sudo systemctl daemon-reload"
-
-    ]
 }
 
 
