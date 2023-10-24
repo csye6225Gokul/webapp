@@ -1,6 +1,7 @@
 [Unit]
 Description=My Node.js Web Application
-After=cloud-final.service
+After=cloud-init.target
+Wants=cloud-init.target
 
 [Service]
 ExecStart=/usr/bin/node /home/admin/webapp/server.js
