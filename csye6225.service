@@ -1,15 +1,14 @@
 [Unit]
 Description=My Node.js Web Application
-ConditionPathExists=/home/admin/webapp
-After=cloud-init.target
-Wants=cloud-init.target
+ConditionPathExists=/home/admin/webapp/
 
 [Service]
+Type=simple
+User=admin
+Group=admin
+WorkingDirectory=/home/admin/webapp
 ExecStart=/usr/bin/node /home/admin/webapp/server.js
 Restart=always
-User=admin  # Use the admin user
-Group=admin  # Use the admin group or whatever primary group the admin user belongs to
-WorkingDirectory=/home/admin/webapp
 
 [Install]
 WantedBy=cloud-init.target
