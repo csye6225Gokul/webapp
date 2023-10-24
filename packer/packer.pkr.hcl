@@ -93,10 +93,18 @@ provisioner "shell" {
     destination = "/home/admin/webapp.zip"
   }
 
-  provisioner "file" {
+provisioner "file" {
     source      = "/home/runner/work/webapp/webapp/csye6225.service"
-    destination = "/etc/systemd/system/csye6225.service"
-  }
+    destination = "/home/admin/csye6225.service"
+}
+
+
+provisioner "shell" {
+    inline = [
+      "sudo mv /home/admin/csye6225.service /etc/systemd/system/csye6225.service"
+    ]
+}
+
 
 provisioner "shell" {
     inline = [
