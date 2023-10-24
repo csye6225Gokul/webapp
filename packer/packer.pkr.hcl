@@ -115,7 +115,7 @@ provisioner "shell" {
     "echo ${var.db_root_password}",
     "sudo apt-get install -y nodejs npm unzip mariadb-server",
     "sudo systemctl start mariadb",
-    "sudo apt-get install cloud-init"
+    "sudo apt-get install cloud-init",
     "sudo apt-get install -y expect",
     
     # Secure installation
