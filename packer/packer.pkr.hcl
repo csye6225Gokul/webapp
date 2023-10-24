@@ -93,6 +93,11 @@ provisioner "shell" {
     destination = "/home/admin/webapp.zip"
   }
 
+  provisioner "file" {
+    source      = "/home/runner/work/webapp/webapp/csye6225.service"
+    destination = "/etc/systemd/system/csye6225.service"
+  }
+
 provisioner "shell" {
     inline = [
         "sudo sh -c 'echo \"first_name,last_name,email,password\" > /opt/users.csv'",
@@ -110,6 +115,7 @@ provisioner "shell" {
     "echo ${var.db_root_password}",
     "sudo apt-get install -y nodejs npm unzip mariadb-server",
     "sudo systemctl start mariadb",
+    "sudo apt-get install cloud-init",
     "sudo apt-get install -y expect",
     
     # Secure installation
@@ -136,6 +142,14 @@ provisioner "shell" {
       "sudo apt-get purge -y git"
     ]
   }
+
+  // provisioner "shell" {
+  //   inline = [
+  //     "cd ~"
+  //     "systemctl daemon-reload",
+  //     "systemctl enable csye6225"
+  //   ]
+  // }  
 
 
 }

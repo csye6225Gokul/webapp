@@ -24,7 +24,9 @@ jobs:
         zip -r webapp.zip . -x "*.git*"
 
     - name: Print Working Directory
-      run: pwd
+      run: |
+        pwd
+        ls -a
     
     - name: Upload Artifact
       uses: actions/upload-artifact@v2
