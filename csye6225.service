@@ -1,9 +1,6 @@
 [Unit]
 Description=My Node.js Web Application
 ConditionPathExists=/home/admin/webapp/
-# After=cloud-init.target
-# Wants=cloud-init.target
-
 
 [Service]
 Type=simple
@@ -12,7 +9,6 @@ Group=admin
 WorkingDirectory=/home/admin/webapp
 ExecStart=/usr/bin/node /home/admin/webapp/server.js
 Restart=always
-
 
 [Install]
 WantedBy=cloud-init.target
