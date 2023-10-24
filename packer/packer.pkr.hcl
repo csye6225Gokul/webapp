@@ -82,7 +82,9 @@ build {
 provisioner "shell" {
   inline = [
     "echo $AWS_ACCESS_KEY_ID",
-    "echo $AWS_SECRET_ACCESS_KEY"
+    "echo $AWS_SECRET_ACCESS_KEY",
+    "sudo groupadd csye6225",
+    "sudo useradd -s /bin/false -g csye6225 -d /opt/csye6225 -m csye6225"
   ]
 }
 
@@ -101,7 +103,11 @@ provisioner "file" {
 
 provisioner "shell" {
     inline = [
-      "sudo mv /home/admin/csye6225.service /etc/systemd/system/csye6225.service"
+      "sudo mv /home/admin/csye6225.service /etc/systemd/system/csye6225.service",
+      "sudo chmod 644 /etc/systemd/system/csye6225.service",
+      "sudo systemctl daemon-reload"
+
+
     ]
 }
 

@@ -1,15 +1,19 @@
 [Unit]
 Description=My Node.js Web Application
-After=network.target
+After=cloud-final.service
 
 [Service]
 ExecStart=/usr/bin/node /home/admin/webapp/server.js
 Restart=always
-User=csye6225
-Group=csye6225
+User=admin  # Use the admin user
+Group=admin  # Use the admin group or whatever primary group the admin user belongs to
+Environment=MYSQL_PORT=3306
+Environment=MYSQL_USER=csye6225
+Environment=MYSQL_PASSWORD=msdIndu99
+Environment=MYSQL_DATABASE=csye6225
 Environment=PATH=/usr/bin:/usr/local/bin
 Environment=NODE_ENV=production
 WorkingDirectory=/home/admin/webapp
 
 [Install]
-WantedBy=multi-user.target
+WantedBy=cloud-init.target
