@@ -104,7 +104,7 @@ build {
   provisioner "shell" {
     inline = [
       "sudo mv /home/admin/csye6225.service /etc/systemd/system/csye6225.service",
-      "sudo mv /home/admin/webapp.zip /opt/webapp.zip"
+      "sudo mv /home/admin/webapp.zip /opt/webapp.zip",
       "sudo chmod 644 /etc/systemd/system/csye6225.service",
       "sudo systemctl daemon-reload",
       "sudo systemctl enable csye6225.service",
