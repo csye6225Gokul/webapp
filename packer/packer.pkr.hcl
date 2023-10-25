@@ -104,6 +104,7 @@ build {
   provisioner "shell" {
     inline = [
       "sudo mv /home/admin/csye6225.service /etc/systemd/system/csye6225.service",
+      "sudo mv /home/admin/webapp.zip /opt/webapp.zip"
       "sudo chmod 644 /etc/systemd/system/csye6225.service",
       "sudo systemctl daemon-reload",
       "sudo systemctl enable csye6225.service",
@@ -127,7 +128,7 @@ build {
     inline = [
       "sudo apt-get update",
       "echo ${var.db_root_password}",
-      "sudo apt-get install -y nodejs npm unzip mariadb-server",
+      "sudo apt-get install -y nodejs npm unzip",
       // "sudo systemctl start mariadb",
       "sudo apt-get install cloud-init",
       "sudo apt-get install -y expect",
@@ -139,10 +140,10 @@ build {
 
       "pwd",
       "ls -a",
-      "cd /home/admin",
+      "cd /opt",
       "pwd",
       "unzip webapp.zip -d webapp && cd webapp && npm install",
-      "sudo chown csye6225:csye6225 /home/admin/webapp",
+      "sudo chown csye6225:csye6225 -R /opt/webapp",
       "sudo chmod g+x server.js"
       // "echo 'MYSQL_USER=root' > /home/admin/webapp/.env",
       // "echo 'MYSQL_PASSWORD=${var.db_root_password}' >> /home/admin/webapp/.env",
