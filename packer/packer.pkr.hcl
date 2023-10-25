@@ -95,10 +95,10 @@ build {
     destination = "/home/admin/webapp.zip"
   }
 
-  provisioner "file" {
-    source      = "webapp.zip"
-    destination = "/opt/webapp.zip"
-  }
+  // provisioner "file" {
+  //   source      = "webapp.zip"
+  //   destination = "/opt/webapp.zip"
+  // }
 
   provisioner "file" {
     source      = "/home/runner/work/webapp/webapp/csye6225.service"
