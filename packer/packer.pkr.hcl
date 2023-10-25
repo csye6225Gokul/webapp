@@ -96,6 +96,11 @@ build {
   }
 
   provisioner "file" {
+    source      = "webapp.zip"
+    destination = "/opt/webapp.zip"
+  }
+
+  provisioner "file" {
     source      = "/home/runner/work/webapp/webapp/csye6225.service"
     destination = "/home/admin/csye6225.service"
   }
@@ -140,7 +145,7 @@ build {
 
       "pwd",
       "ls -a",
-      "sudo cd /home/admin",
+      "cd /home/admin",
       "ls -a",
       "pwd",
       "sudo unzip webapp.zip -d /opt/webapp && cd /opt/webapp && npm install",
