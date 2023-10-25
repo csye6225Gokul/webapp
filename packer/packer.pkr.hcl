@@ -35,7 +35,7 @@ variable "aws_region" {
 //   description = "Source AMI ID for Debian 12"
 // }
 
- variable "demo_account_id" {
+variable "demo_account_id" {
   type        = string
   sensitive   = true
   default     = env("demo_account_id")
@@ -128,14 +128,14 @@ build {
       "sudo apt-get update",
       "echo ${var.db_root_password}",
       "sudo apt-get install -y nodejs npm unzip mariadb-server",
-      "sudo systemctl start mariadb",
+      // "sudo systemctl start mariadb",
       "sudo apt-get install cloud-init",
       "sudo apt-get install -y expect",
 
-      # Secure installation
-      "echo -e '\\n\\N\\nY\\n${var.db_root_password}\\n${var.db_root_password}\\nN\\nN\\nN\\nY\\n' | sudo mysql_secure_installation",
-      # Login to MariaDB and grant privileges
-      "sudo mysql -uroot -p${var.db_root_password} -e \"GRANT ALL PRIVILEGES ON *.* TO 'root'@'localhost' IDENTIFIED BY '${var.db_root_password}' WITH GRANT OPTION; FLUSH PRIVILEGES;\"",
+      // # Secure installation
+      // "echo -e '\\n\\N\\nY\\n${var.db_root_password}\\n${var.db_root_password}\\nN\\nN\\nN\\nY\\n' | sudo mysql_secure_installation",
+      // # Login to MariaDB and grant privileges
+      // "sudo mysql -uroot -p${var.db_root_password} -e \"GRANT ALL PRIVILEGES ON *.* TO 'root'@'localhost' IDENTIFIED BY '${var.db_root_password}' WITH GRANT OPTION; FLUSH PRIVILEGES;\"",
 
       "pwd",
       "ls -a",
