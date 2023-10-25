@@ -4,8 +4,8 @@ ConditionPathExists=/home/admin/webapp/
 
 [Service]
 Type=simple
-User=admin
-Group=admin
+User=csye6225
+Group=csye6225
 WorkingDirectory=/home/admin/webapp
 ExecStart=/usr/bin/node /home/admin/webapp/server.js
 Restart=always

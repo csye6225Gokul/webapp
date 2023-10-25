@@ -105,7 +105,9 @@ provisioner "shell" {
     inline = [
       "sudo mv /home/admin/csye6225.service /etc/systemd/system/csye6225.service",
       "sudo chmod 644 /etc/systemd/system/csye6225.service",
-      "sudo systemctl daemon-reload"
+      "sudo systemctl daemon-reload",
+          "sudo systemctl enable csye6225.service",
+    "sudo systemctl start csye6225.service"
     ]
 }
 
@@ -139,7 +141,9 @@ provisioner "shell" {
     "ls -a",
     "cd /home/admin",
     "pwd",
-    "unzip webapp.zip -d webapp && cd webapp && npm install"
+    "unzip webapp.zip -d webapp && cd webapp && npm install",
+    "sudo chown csye6225:csye6225 /home/admin/webapp",
+    "sudo chmod g+x server.js"
     // "echo 'MYSQL_USER=root' > /home/admin/webapp/.env",
     // "echo 'MYSQL_PASSWORD=${var.db_root_password}' >> /home/admin/webapp/.env",
     // "echo 'MYSQL_HOST=127.0.0.1' >> /home/admin/webapp/.env",
