@@ -96,11 +96,6 @@ build {
   }
 
   provisioner "file" {
-    source      = "webapp.zip"
-    destination = "/opt/webapp.zip"
-  }
-
-  provisioner "file" {
     source      = "/home/runner/work/webapp/webapp/csye6225.service"
     destination = "/home/admin/csye6225.service"
   }
@@ -145,10 +140,10 @@ build {
 
       "pwd",
       "ls -a",
-      "sudo cd /opt",
+      "sudo cd /home/admin",
       "ls -a",
       "pwd",
-      "sudo unzip webapp.zip -d webapp && cd webapp && npm install",
+      "sudo unzip webapp.zip -d /opt/webapp && cd /opt/webapp && npm install",
       "sudo chown csye6225:csye6225 -R /opt/webapp",
       "sudo chmod g+x server.js"
       // "echo 'MYSQL_USER=root' > /home/admin/webapp/.env",
