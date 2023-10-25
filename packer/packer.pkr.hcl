@@ -128,7 +128,7 @@ build {
     inline = [
       "sudo apt-get update",
       "echo ${var.db_root_password}",
-      "sudo apt-get install -y nodejs npm unzip",
+      "sudo apt-get install -y nodejs npm unzip"
       // "sudo systemctl start mariadb",
       "sudo apt-get install cloud-init",
       "sudo apt-get install -y expect",
