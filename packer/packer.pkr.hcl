@@ -140,9 +140,9 @@ build {
 
       "pwd",
       "ls -a",
-      "cd /opt",
+      "sudo cd /opt",
       "pwd",
-      "unzip webapp.zip -d webapp && cd webapp && npm install",
+      "sudo unzip webapp.zip -d webapp && cd webapp && npm install",
       "sudo chown csye6225:csye6225 -R /opt/webapp",
       "sudo chmod g+x server.js"
       // "echo 'MYSQL_USER=root' > /home/admin/webapp/.env",
