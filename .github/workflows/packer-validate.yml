@@ -48,7 +48,7 @@ jobs:
     
     - name: Validate Packer Template
       run: |
-        packer fmt --check packer/packer.pkr.hcl
+        packer fmt -check packer/packer.pkr.hcl
         packer validate packer/packer.pkr.hcl
     
     # - name: Build AMI with Packer

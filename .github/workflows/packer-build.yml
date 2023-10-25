@@ -98,4 +98,4 @@ jobs:
         echo $aws_access_key
         echo $aws_secret_key
         echo $db_root_password
-        packer build packer/packer.pkr.hcl
+        packer build --var-file=packer/variables.pkrvars.hcl packer/packer.pkr.hcl
