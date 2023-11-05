@@ -50,7 +50,7 @@ jobs:
     - name: Setup Packer
       uses: hashicorp/setup-packer@main
       id: setup
-      with:
+      with: 
         version: "latest"
 
     - name: Zip Repository
