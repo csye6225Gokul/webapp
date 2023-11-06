@@ -192,7 +192,7 @@ build {
   provisioner "shell" {
     inline = [
       "sudo apt-get purge -y git",
-      "sudo mv /home/admin/amazon-cloudwatch-config.json /opt/aws/amazon-cloudwatch-agent/etc/amazon-cloudwatch-agent.json"
+      "sudo mv /home/admin/amazon-cloudwatch-agent.json /opt/aws/amazon-cloudwatch-agent/etc/amazon-cloudwatch-agent.json"
     ]
   }
 
