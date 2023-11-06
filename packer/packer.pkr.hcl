@@ -134,9 +134,9 @@ build {
       "sudo apt-get update",
       "echo ${var.db_root_password}",
       "sudo apt-get install -y nodejs npm unzip",
-      "sudo apt-get install -y amazon-cloudwatch-agent",
-      "sudo systemctl enable amazon-cloudwatch-agent",
-      "sudo systemctl start amazon-cloudwatch-agent",
+      // "sudo apt-get install -y amazon-cloudwatch-agent",
+      // "sudo systemctl enable amazon-cloudwatch-agent",
+      // "sudo systemctl start amazon-cloudwatch-agent",
       // "sudo systemctl start mariadb",
       "sudo apt-get install cloud-init",
       "sudo apt-get install -y expect",
@@ -164,6 +164,24 @@ build {
       // "chown admin:admin /home/admin/webapp/.env" # Ensure that the 'admin' user owns the .env file
     ]
   }
+
+  provisioner "shell" {
+    inline = [
+      "sudo apt-get update -y",
+      // Your other setup commands...
+
+      // Download and install the CloudWatch agent
+      "wget https://s3.amazonaws.com/amazoncloudwatch-agent/debian/amd64/latest/amazon-cloudwatch-agent.deb",
+      "sudo dpkg -i amazon-cloudwatch-agent.deb",
+      // Ensure the agent will start on boot
+      "sudo systemctl daemon-reload",
+      "sudo systemctl enable amazon-cloudwatch-agent",
+      "sudo systemctl start amazon-cloudwatch-agent"
+
+      // Your additional setup commands...
+    ]
+  }
+
 
 
   provisioner "shell" {
