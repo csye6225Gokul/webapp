@@ -1,6 +1,6 @@
 import baseRouter from './healthRoutes.js';
 import assignmentRouter from './assignmentRoutes.js'
-import logger from './logger.js';
+import logger from '../../logger.js';
 export default(app) => {
     app.use('/',(req, res) => {
         res.set('Cache-Control', 'no-cache');

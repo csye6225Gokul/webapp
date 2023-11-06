@@ -1,7 +1,7 @@
 import {
   Sequelize
 } from 'sequelize';
-import logger from './logger.js';
+import logger from '../../logger.js';
 import fs from 'fs';
 import csv from 'csv-parser';
 import Account from '../models/account.js';
