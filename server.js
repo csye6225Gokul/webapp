@@ -1,7 +1,7 @@
 import app from './src/app.js';
 import loadData from './src/util/dbLoader.js';
 import Sequelize from 'sequelize';
-
+import logger from './logger.js';
 import { config } from 'dotenv';
 
 config();
@@ -23,9 +23,10 @@ config();
 
 // sequelize.sync({ alter: true });
 
-
 const ports = 9000;
 app.listen(ports, () => {
   console.log(`Server is running on port ${ports}`);
+logger.info('Application is starting...');
+
   loadData();
 });

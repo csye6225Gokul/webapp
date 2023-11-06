@@ -1,6 +1,7 @@
 import {
   Sequelize
 } from 'sequelize';
+import logger from './logger.js';
 import fs from 'fs';
 import csv from 'csv-parser';
 import Account from '../models/account.js';
@@ -36,6 +37,7 @@ async function ensureDatabaseExists() {
     await tmpSequelize.query(`CREATE DATABASE IF NOT EXISTS \`${database}\``);
     console.log('Database ensured.');
   } catch (err) {
+    logger.error('Error:', err);
     console.error('Error while ensuring database exists', err);
     throw err;
   } finally {
@@ -78,6 +80,7 @@ export default async function loadData() {
             console.log(`Account for ${row.email} already exists. Skipping.`);
           }
         } catch (err) {
+          logger.error('Error:', err);
           console.error(`Error processing record for ${row.email}:`, err);
         }
       })
@@ -85,6 +88,7 @@ export default async function loadData() {
         console.log('CSV file processing completed.');
       });
   } catch (error) {
+    logger.error('Error:', err);
     console.error('Unable to connect to the database:', error);
   }
 
