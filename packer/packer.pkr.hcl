@@ -190,6 +190,11 @@ build {
     ]
   }
 
+  provisioner "file" {
+    source      = "/home/runner/work/webapp/webapp/amazon-cloudwatch-config.json"
+    destination = "/opt/aws/amazon-cloudwatch-agent/etc/amazon-cloudwatch-config.json"
+  }
+
   // provisioner "shell" {
   //   inline = [
   //     "cd ~"

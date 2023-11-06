@@ -3,12 +3,13 @@
 
 import {Account} from '../models/index.js'; // Adjust the path accordingly
 import bcrypt from 'bcrypt';
+import {statsdMiddleware}from '../../statsd.js'
 
 const basicAuth = async (req, res, next) => {
   try {
     const authHeader = req.headers.authorization || '';
     const [type, encodedCredentials] = authHeader.split(' ');
-
+    
 
     if (type.toLowerCase() !== 'basic') {
       res.set('WWW-Authenticate', 'Basic realm="Secure Area"');
