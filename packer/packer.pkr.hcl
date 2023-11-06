@@ -105,6 +105,11 @@ build {
     destination = "/home/admin/csye6225.service"
   }
 
+    provisioner "file" {
+    source      = "/home/runner/work/webapp/webapp/amazon-cloudwatch-config.json"
+    destination = "/home/admin/amazon-cloudwatch-config.json"
+  }
+
 
   provisioner "shell" {
     inline = [
@@ -186,14 +191,11 @@ build {
 
   provisioner "shell" {
     inline = [
-      "sudo apt-get purge -y git"
+      "sudo apt-get purge -y git",
+      "sudo mv /home/admin/amazon-cloudwatch-config.json /opt/aws/amazon-cloudwatch-agent/etc/amazon-cloudwatch-config.json"
     ]
   }
 
-  provisioner "file" {
-    source      = "/home/runner/work/webapp/webapp/amazon-cloudwatch-config.json"
-    destination = "/opt/aws/amazon-cloudwatch-agent/etc/amazon-cloudwatch-config.json"
-  }
 
   // provisioner "shell" {
   //   inline = [
