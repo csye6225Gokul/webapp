@@ -11,6 +11,7 @@ const basicAuth = async (req, res, next) => {
 
 
     if (type.toLowerCase() !== 'basic') {
+      res.set('WWW-Authenticate', 'Basic realm="Secure Area"');
       return res.status(401).send('Expected a Basic Auth header');
     }
 
