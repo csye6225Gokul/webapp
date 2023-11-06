@@ -105,7 +105,7 @@ build {
     destination = "/home/admin/csye6225.service"
   }
 
-    provisioner "file" {
+  provisioner "file" {
     source      = "/home/runner/work/webapp/webapp/amazon-cloudwatch-config.json"
     destination = "/home/admin/amazon-cloudwatch-config.json"
   }
