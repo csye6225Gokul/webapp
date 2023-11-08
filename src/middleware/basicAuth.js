@@ -4,6 +4,7 @@
 import {Account} from '../models/index.js'; // Adjust the path accordingly
 import bcrypt from 'bcrypt';
 import {statsdMiddleware}from '../../statsd.js'
+import logger from '../../logger.js';
 
 const basicAuth = async (req, res, next) => {
   try {
@@ -17,6 +18,7 @@ const basicAuth = async (req, res, next) => {
     }
 
     console.log("In middleware")
+    logger.info("In middleware")
 
     const [email, password] = Buffer.from(encodedCredentials, 'base64').toString('utf8').split(':');
     console.log(email)
@@ -34,6 +36,8 @@ const basicAuth = async (req, res, next) => {
     req.user = account;
     next();
   } catch (error) {
+
+    logger.error(error.message)
     res.status(500).json({ error: error.message });
   }
 };

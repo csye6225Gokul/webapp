@@ -1,5 +1,6 @@
 import express from "express";
 import Sequelize from "sequelize";
+import logger from '../../logger.js';
 
 import { Assignment } from "../models/index.js";
 
@@ -19,6 +20,7 @@ export const createAssignment = async (req, res) => {
 
 
     if(req.body.name == ""){
+      logger.error("Req body param is wrong")
       return res.status(400).json({ error: "Req body param is wrong" });
     }
 
@@ -37,6 +39,7 @@ export const createAssignment = async (req, res) => {
     delete assignment.dataValues.updatedAt;
     res.status(201).json(assignment);
   } catch (error) {
+    logger.error(error.message)
     if (error instanceof Sequelize.ValidationError) {
       res.status(400).json({ error: error.message });
     } else if (
@@ -66,11 +69,13 @@ export const getAssignmnet = async (req, res) => {
     });
     if (assignment) {
       delete assignment.dataValues.creatorId;
+      logger.info(assignment)
       res.status(200).json(assignment);
     } else {
       res.status(404).json({ error: "Assignment not found" });
     }
   } catch (error) {
+    logger.error(error.message)
     res.status(500).json({ error: error.message });
   }
 };
@@ -118,6 +123,7 @@ export const updateAssignment = async (req, res) => {
       res.status(404).json({ error: "Assignment not found" });
     }
   } catch (error) {
+    logger.error(error.message)
     if (error instanceof Sequelize.ValidationError) {
       res.status(400).json({ error: error.message });
     } else if (
@@ -156,6 +162,7 @@ export const deleteAssignment = async (req, res) => {
       res.status(404).end();
     }
   } catch (error) {
+    logger.error(error.message)
     res.status(500).json({ error: error.message });
   }
 };
@@ -176,6 +183,7 @@ export const getAllAssignment = async (req, res) => {
 
     res.status(200).json(assignments);
   } catch (error) {
+    logger.error(error.message)
     res.status(500).json({ error: error.message });
   }
 };
