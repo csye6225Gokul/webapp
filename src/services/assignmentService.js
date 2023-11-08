@@ -37,6 +37,7 @@ export const createAssignment = async (req, res) => {
     delete assignment.dataValues.creatorId;
     delete assignment.dataValues.createdAt;
     delete assignment.dataValues.updatedAt;
+    logger.info(assignment)
     res.status(201).json(assignment);
   } catch (error) {
     logger.error(error.message)
@@ -89,13 +90,14 @@ export const updateAssignment = async (req, res) => {
       }
 
       const keys = ["name", "points", "num_of_attempts", "deadline"];
-
+      logger.info(assignment)
       let count =0
       for (const key in req.body) {
         console.log(key);
         count+=1
         if (!keys.includes(key)) {
           res.status(400).json({ error: "Req body param is wrong" });
+          logger.error("Req body param is wrong")
           break; // You may want to break out of the loop after the first invalid key is encountered.
         }
       }
@@ -154,6 +156,8 @@ export const deleteAssignment = async (req, res) => {
     const assignment = await Assignment.findByPk(req.params.id);
     if (assignment) {
       if (assignment.creatorId !== req.user.id) {
+        logger.info(assignment)
+
         return res.status(403).json({ error: "Not authorized" });
       }
       await assignment.destroy();
