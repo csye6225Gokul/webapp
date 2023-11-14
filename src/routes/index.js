@@ -17,11 +17,11 @@ export default(app) => {
               localIPv4: localIPv4.data,
               publicIPv4: publicIPv4.data,
             };
-            res.json(data).status(200);
+            return res.json(data).status(200);
 
           } catch (error) {
             res.set('Cache-Control', 'no-cache');
-          res.status(200).send("You have reached Webapp");
+            return res.status(200).send("You have reached Webapp");
             console.error('Error fetching EC2 metadata:', error);
           }
     })
