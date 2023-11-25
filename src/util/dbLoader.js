@@ -91,7 +91,7 @@ export default async function loadData() {
         console.log('CSV file processing completed.');
       });
   } catch (error) {
-    logger.error('Error:', err);
+    logger.error('Error:', error);
     console.error('Unable to connect to the database:', error);
   }
 
