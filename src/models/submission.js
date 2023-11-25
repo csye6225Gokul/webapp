@@ -10,7 +10,7 @@ const Submission = (sequelize) => {
       unique: true
     },
     assignment_id: {
-      type: DataTypes.STRING,
+      type: DataTypes.UUID,
       allowNull: false,
       references: {
         model: 'Assignments', // Name of the Assignment model/table
