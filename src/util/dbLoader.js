@@ -36,6 +36,7 @@ async function ensureDatabaseExists() {
 
   try {
     await tmpSequelize.query(`CREATE DATABASE IF NOT EXISTS \`${database}\``);
+    console.log(mysqlUrl)
     console.log('Database ensured.');
   } catch (err) {
     logger.error('Error:', err);
@@ -91,7 +92,7 @@ export default async function loadData() {
         console.log('CSV file processing completed.');
       });
   } catch (error) {
-    logger.error('Error:', err);
+    logger.error('Error:', error);
     console.error('Unable to connect to the database:', error);
   }
 
