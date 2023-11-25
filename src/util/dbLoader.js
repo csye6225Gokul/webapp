@@ -36,6 +36,7 @@ async function ensureDatabaseExists() {
 
   try {
     await tmpSequelize.query(`CREATE DATABASE IF NOT EXISTS \`${database}\``);
+    console.log(mysqlUrl)
     console.log('Database ensured.');
   } catch (err) {
     logger.error('Error:', err);
