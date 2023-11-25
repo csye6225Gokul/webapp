@@ -51,3 +51,14 @@ export const deleteAss = async (req, res) => {
     }
 }
 
+export const postAssign = async (req, res) => {
+    try{
+        console.log(req.body)
+        const todoTask = await assignmentService.submitAssignment(req,res);
+        console.log("after controller")
+       
+    }catch(error){
+        console.log("inside get controller")
+    }
+}
+

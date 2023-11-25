@@ -6,6 +6,7 @@ import fs from 'fs';
 import csv from 'csv-parser';
 import Account from '../models/account.js';
 import Assignment from '../models/assignment.js';
+import Submission from '../models/submission.js';
 import {
   config
 } from 'dotenv';
@@ -55,9 +56,11 @@ export default async function loadData() {
 
     const AccountModel = Account(sequelize);
     const AssignmentModel = Assignment(sequelize);
+    const SubmissionModel = Submission(sequelize);
 
     await AccountModel.sync();
     await AssignmentModel.sync();
+    await SubmissionModel.sync();
 
     // The main change: location of the CSV file
     const csvFilePath = '/opt/users.csv';
