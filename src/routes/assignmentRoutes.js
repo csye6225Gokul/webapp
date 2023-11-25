@@ -20,6 +20,11 @@ Router.route('/:id').get(assignmentController.get)
                       res.status(405).end();
                       
                     });
+Router.route('/:id/submission').post(assignmentController.postAssign)
+                               .all((req, res) => { 
+                                res.set('Cache-Control', 'no-cache');
+                                res.status(405).end();
+                              });
 
 Router.route("*").all((req, res) => { 
   res.set('Cache-Control', 'no-cache');
