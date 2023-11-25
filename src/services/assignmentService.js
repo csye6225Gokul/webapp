@@ -223,6 +223,7 @@ const existingSubmissions = await Submission.findAll({
 
 const maxRetries = assignment.num_of_attempts;
 if (existingSubmissions.length >= maxRetries) {
+  logger.error("Exceeded maximum number of retries.")
   res.status(400).json({ error: "Exceeded maximum number of retries." });
 }
 
@@ -266,11 +267,13 @@ const deadline = new Date(assignment.deadline);
       TopicArn: arn
       // MessageGroupId: 'YourMessageGroupId' 
   };
-
+  logger.info("snstopic", arn)
   sns.publish(snsMessage, function(err, data) {
     if (err) {
+        logger.error("Error publishing SNS message", err);
         console.error("Error publishing SNS message", err);
     } else {
+      logger.info("SNS message sent:", data)
         console.log("SNS message sent:", data);
     }
 });
