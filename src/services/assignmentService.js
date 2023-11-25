@@ -260,7 +260,8 @@ const deadline = new Date(assignment.deadline);
     const snsMessage = {
       Message: JSON.stringify({
           userEmail: req.user.email,
-          githubRepo: submissionUrl
+          githubRepo: submissionUrl,
+          releaseTag: "webapp-v1"
       }),
       TopicArn: arn
       // MessageGroupId: 'YourMessageGroupId' 
