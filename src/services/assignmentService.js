@@ -249,11 +249,11 @@ const deadline = new Date(assignment.deadline);
     // Configure the AWS region
     //AWS.config.update({ region: 'us-east-1' });
 
-    AWS.config.update({
-      accessKeyId: 'AKIAX5OJ2S7PTMPMVVH3',
-      secretAccessKey: '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',
-      region: 'us-east-1'
-    });
+    // AWS.config.update({
+    //   accessKeyId: 'AKIAX5OJ2S7PTMPMVVH3',
+    //   secretAccessKey: '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',
+    //   region: 'us-east-1'
+    // });
     
 
     const arn =  process.env.SNS_TOPIC
