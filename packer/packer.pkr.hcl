@@ -127,7 +127,7 @@ build {
     inline = [
       "sudo sh -c 'echo \"first_name,last_name,email,password\" > /opt/users.csv'",
       "sudo sh -c 'echo \"john,doe,hariharangokul2022@gmail.com,abc123\" >> /opt/users.csv'",
-      "sudo sh -c 'echo \"john,doe,singh.shikha@northeastern.edu,abc123\" >> /opt/users.csv'",
+      "sudo sh -c 'echo \"johshn,doe,singh.shikha@northeastern.edu,abc123\" >> /opt/users.csv'",
       "sudo sh -c 'echo \"jane,doe,jayavel.g@northeastern.edu,xyz456\" >> /opt/users.csv'",
       "sudo sh -c 'echo \"vivek,hana,husky20230331@gmail.com,vivek123\" >> /opt/users.csv'",
       "sudo sh -c 'echo \"sara,john,sara.john@gmail.com,sara123\" >> /opt/users.csv'"
