@@ -160,11 +160,22 @@ export const deleteAssignment = async (req, res) => {
 
 
     const assignment = await Assignment.findByPk(req.params.id);
+    const submission = await Submission.findAll({
+      where: {
+        assignment_id: req.params.id
+      },
+    });
+
+
+
     if (assignment) {
       if (assignment.creatorId !== req.user.id) {
         logger.info(assignment)
 
         return res.status(403).json({ error: "Not authorized" });
+      }
+      if (submission){
+        return res.status(400).json({ error: "There is an submission attached to the Assignment. You can't delete it" });
       }
       await assignment.destroy();
       res.status(204).end();
@@ -213,7 +224,7 @@ const assignment = await Assignment.findByPk(assignmentId);
 
 if(assignment){
 
-  console.log(assignment)
+console.log(assignment)
 const existingSubmissions = await Submission.findAll({
   where: {
     assignment_id: assignmentId,
@@ -280,16 +291,10 @@ const deadline = new Date(assignment.deadline);
 
     res.status(201).json(newSubmission);
 
-
 }
 else{
   res.status(404).end();
 }
-
-
-
-
-
   
 } catch (error) {
 
