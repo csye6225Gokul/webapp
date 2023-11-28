@@ -160,11 +160,22 @@ export const deleteAssignment = async (req, res) => {
 
 
     const assignment = await Assignment.findByPk(req.params.id);
+    const submission = await Submission.findAll({
+      where: {
+        assignment_id: req.params.id
+      },
+    });
+
+
+
     if (assignment) {
       if (assignment.creatorId !== req.user.id) {
         logger.info(assignment)
 
         return res.status(403).json({ error: "Not authorized" });
+      }
+      if (submission){
+        return res.status(400).json({ error: "There is an submission attached to the Assignment. You can't delete it" });
       }
       await assignment.destroy();
       res.status(204).end();
@@ -213,7 +224,7 @@ const assignment = await Assignment.findByPk(assignmentId);
 
 if(assignment){
 
-  console.log(assignment)
+console.log(assignment)
 const existingSubmissions = await Submission.findAll({
   where: {
     assignment_id: assignmentId,
@@ -223,6 +234,7 @@ const existingSubmissions = await Submission.findAll({
 
 const maxRetries = assignment.num_of_attempts;
 if (existingSubmissions.length >= maxRetries) {
+  logger.error("Exceeded maximum number of retries.")
   res.status(400).json({ error: "Exceeded maximum number of retries." });
 }
 
@@ -248,11 +260,11 @@ const deadline = new Date(assignment.deadline);
     // Configure the AWS region
     //AWS.config.update({ region: 'us-east-1' });
 
-    AWS.config.update({
-      accessKeyId: 'AKIAX5OJ2S7PTMPMVVH3',
-      secretAccessKey: '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',
-      region: 'us-east-1'
-    });
+    // AWS.config.update({
+    //   accessKeyId: 'AKIAX5OJ2S7PTMPMVVH3',
+    //   secretAccessKey: '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',
+    //   region: 'us-east-1'
+    // });
     
 
     const arn =  process.env.SNS_TOPIC
@@ -266,27 +278,23 @@ const deadline = new Date(assignment.deadline);
       TopicArn: arn
       // MessageGroupId: 'YourMessageGroupId' 
   };
-
+  logger.info("snstopic", arn)
   sns.publish(snsMessage, function(err, data) {
     if (err) {
+        logger.error("Error publishing SNS message", err);
         console.error("Error publishing SNS message", err);
     } else {
+      logger.info("SNS message sent:", data)
         console.log("SNS message sent:", data);
     }
 });
 
     res.status(201).json(newSubmission);
 
-
 }
 else{
   res.status(404).end();
 }
-
-
-
-
-
   
 } catch (error) {
 
