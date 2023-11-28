@@ -258,7 +258,7 @@ const deadline = new Date(assignment.deadline);
     delete newSubmission.dataValues.updatedAt;
 
     // Configure the AWS region
-    //AWS.config.update({ region: 'us-east-1' });
+    AWS.config.update({ region: 'us-east-1' });
 
     // AWS.config.update({
     //   accessKeyId: 'AKIAX5OJ2S7PTMPMVVH3',
