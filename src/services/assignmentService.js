@@ -273,7 +273,8 @@ const deadline = new Date(assignment.deadline);
       Message: JSON.stringify({
           userEmail: req.user.email,
           githubRepo: submissionUrl,
-          releaseTag: "webapp-v1"
+          attempt: existingSubmissions.length + 1,
+          maxRetries: maxRetries
       }),
       TopicArn: arn
       // MessageGroupId: 'YourMessageGroupId' 
