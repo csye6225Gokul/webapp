@@ -175,7 +175,7 @@ export const deleteAssignment = async (req, res) => {
         return res.status(403).json({ error: "Not authorized" });
       }
       if (submission){
-        return res.status(400).json({ error: "There is an submission attached to the Assignment. You can't delete it" });
+        return res.status(403).json({ error: "There is an submission attached to the Assignment. You can't delete it" });
       }
       await assignment.destroy();
       res.status(204).end();
