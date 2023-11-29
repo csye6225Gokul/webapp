@@ -174,7 +174,7 @@ export const deleteAssignment = async (req, res) => {
 
         return res.status(403).json({ error: "Not authorized" });
       }
-      if (submission){
+      if (submission.length> 0){
         return res.status(403).json({ error: "There is an submission attached to the Assignment. You can't delete it" });
       }
       await assignment.destroy();
@@ -252,13 +252,13 @@ const existingSubmissions = await Submission.findAll({
 const maxRetries = assignment.num_of_attempts;
 if (existingSubmissions.length >= maxRetries) {
   logger.error("Exceeded maximum number of retries.")
-  res.status(400).json({ error: "Exceeded maximum number of retries." });
+  return res.status(400).json({ error: "Exceeded maximum number of retries." });
 }
 
 const deadline = new Date(assignment.deadline);
       const currentDate = new Date();
       if (currentDate > deadline) {
-        res.status(400).json({ error: "Submission deadline has passed." });
+        return res.status(400).json({ error: "Submission deadline has passed." });
       }
 
 
@@ -311,7 +311,7 @@ const deadline = new Date(assignment.deadline);
 
 }
 else{
-  res.status(404).end();
+  return res.status(404).end();
 }
   
 } catch (error) {
