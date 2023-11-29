@@ -220,6 +220,23 @@ const userId = req.user.id
 const submissionUrl = req.body.submission_url
 
 
+const keys = ["submission_url"];
+
+var count = 0
+
+for (const key in req.body) {
+  console.log(key);
+  count = count + 1
+  if (!keys.includes(key)) {
+    return res.status(400).json({ error: "Req body param is wrong" });
+    
+  }
+}
+
+if (count !=1){
+  return res.status(400).json({ error: "Req body param is wrong" });
+}
+
 const assignment = await Assignment.findByPk(assignmentId);
 
 if(assignment){
