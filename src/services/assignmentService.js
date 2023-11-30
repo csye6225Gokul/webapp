@@ -291,7 +291,8 @@ const deadline = new Date(assignment.deadline);
           userEmail: req.user.email,
           githubRepo: submissionUrl,
           attempt: existingSubmissions.length + 1,
-          maxRetries: maxRetries
+          maxRetries: maxRetries,
+          assignmentId: assignmentId
       }),
       TopicArn: arn
       // MessageGroupId: 'YourMessageGroupId' 
