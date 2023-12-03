@@ -150,8 +150,7 @@ jobs:
                     AMI_ID=$(aws ec2 describe-images \
                     --executable-users ${{secrets.DEMO_ACCOUNT_ID}} \
                     --query 'Images | sort_by(@, &CreationDate) | [-1].ImageId' \
-                    --filters "Name=name,Values=my-ami_*" \
-                    --output text 
+                    --filters "Name=name,Values=csye6225_Gokul*" \
                     )
        
                     aws ec2 create-launch-template-version --launch-template-id $LT_ID \
