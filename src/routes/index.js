@@ -7,6 +7,11 @@ export default(app) => {
     app.use(statsdMiddleware)
     app.use('/healthz',baseRouter)
     app.use('/v2/assignments',assignmentRouter)
+    app.use((req, res) => {
+      res.set('Cache-Control', 'no-cache');
+      res.status(404).end();
+  });
+
     app.use('/',async (req, res) => {
 
         try {
@@ -25,8 +30,4 @@ export default(app) => {
             console.error('Error fetching EC2 metadata:', error);
           }
     })
-    app.use((req, res) => {
-        res.set('Cache-Control', 'no-cache');
-        res.status(404).end();
-    });
 }
