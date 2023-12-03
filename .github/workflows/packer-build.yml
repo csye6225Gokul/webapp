@@ -168,9 +168,14 @@ jobs:
               - name: Trigger Auto Scaling Group Instance Refresh with Latest Launch Template
                 run: |
                       ASG_NAME="${{ steps.get_asg_and_lt.outputs.asg_name }}"
+
+                      LT_NAME_PREFIX="my-launch-template"
+                  
+                      LT_NAME=$(aws ec2 describe-launch-templates --query "LaunchTemplates[?starts_with(LaunchTemplateName, '${LT_NAME_PREFIX}')].LaunchTemplateName" --output text)
                       
                       # Get the latest version of the Launch Template
-                      LATEST_LT_VERSION=$(aws ec2 describe-launch-templates --launch-template-names "Your-Template-Name" --query "LaunchTemplates[0].VersionNumber" --output text)
+                      LATEST_LT_VERSION=$(aws ec2 describe-launch-templates --launch-template-names ${LT_NAME} --query "LaunchTemplates[0].LatestVersionNumber" --output text)
+
                   
                       # Update the Auto Scaling Group with the latest Launch Template version
                       aws autoscaling update-auto-scaling-group \
