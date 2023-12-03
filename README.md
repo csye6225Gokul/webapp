@@ -11,7 +11,7 @@ This document provides instructions to set up and run the web app locally and ho
 
 2. **Install Dependencies**  
 Navigate to the cloned directory and install the necessary dependencies:
-npm install
+npm install 
 
 3. **Run the App**  
 Once the dependencies are installed, you can run the app using:
