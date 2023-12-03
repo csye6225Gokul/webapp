@@ -151,7 +151,6 @@ jobs:
                     --executable-users ${{secrets.DEMO_ACCOUNT_ID}} \
                     --query 'Images | sort_by(@, &CreationDate) | [-1].ImageId' \
                     --filters "Name=name,Values=csye6225_Gokul*" \
-                    --output text 
                     )
        
                     aws ec2 create-launch-template-version --launch-template-id $LT_ID \
