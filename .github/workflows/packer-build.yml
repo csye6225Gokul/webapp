@@ -180,7 +180,7 @@ jobs:
                       # Update the Auto Scaling Group with the latest Launch Template version
                       aws autoscaling update-auto-scaling-group \
                         --auto-scaling-group-name $ASG_NAME \
-                        --launch-template "LaunchTemplateName=Your-Template-Name,Version=$LATEST_LT_VERSION"
+                        --launch-template "LaunchTemplateName=$LT_NAME,Version=$LATEST_LT_VERSION"
                   
                       # Trigger an instance refresh with the latest Launch Template as default
                       aws autoscaling start-instance-refresh --auto-scaling-group-name $ASG_NAME --strategy Rolling
