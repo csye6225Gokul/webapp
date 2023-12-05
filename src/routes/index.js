@@ -7,7 +7,7 @@ export default(app) => {
 
     app.use(statsdMiddleware)
     app.use('/healthz',baseRouter)
-    app.use('/v3/assignments',assignmentRouter)
+    app.use('/v2/assignments',assignmentRouter)
     app.use('/',async (req, res, next) => {
 
       if (req.path === '/') {
